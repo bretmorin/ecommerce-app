@@ -1,7 +1,6 @@
 package com.example.ecommerceapp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,7 +14,15 @@ public class Excursion {
 	private String image_url;
 	private Date create_date;
 	private Date last_update;
+
+	@ManyToOne
+	@JoinColumn(name = "vacation_id", nullable = false)
 	private Vacation vacation_id;
+
+	@ManyToMany
+	@JoinTable(name = "excursion_cartitem",
+			joinColumns = @JoinColumn(name = "excursion_id"),
+			inverseJoinColumns = @JoinColumn(name = "cart_item_id"))
 	private Set<CartItem> cartitems;
 
 	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_url, Date create_date, Date last_update, Vacation vacation_id, Set<CartItem> cartitems) {

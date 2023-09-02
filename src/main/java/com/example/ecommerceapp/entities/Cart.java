@@ -32,5 +32,87 @@ public class Cart {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
 	private Set<CartItem> cartItems;
 
+	public Cart(Long cart_id, String order_tracking_number, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer_id, Set<CartItem> cartItems) {
+		this.cart_id = cart_id;
+		this.order_tracking_number = order_tracking_number;
+		this.package_price = package_price;
+		this.party_size = party_size;
+		this.status = status;
+		this.create_date = create_date;
+		this.last_update = last_update;
+		this.customer_id = customer_id;
+		this.cartItems = cartItems;
+	}
 
+	public Long getCart_id() {
+		return cart_id;
+	}
+
+	public void setCart_id(Long cart_id) {
+		this.cart_id = cart_id;
+	}
+
+	public String getOrder_tracking_number() {
+		return order_tracking_number;
+	}
+
+	public void setOrder_tracking_number(String order_tracking_number) {
+		this.order_tracking_number = order_tracking_number;
+	}
+
+	public Long getPackage_price() {
+		return package_price;
+	}
+
+	public void setPackage_price(Long package_price) {
+		this.package_price = package_price;
+	}
+
+	public int getParty_size() {
+		return party_size;
+	}
+
+	public void setParty_size(int party_size) {
+		this.party_size = party_size;
+	}
+
+	public StatusType getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusType status) {
+		this.status = status;
+	}
+
+	public Date getCreate_date() {
+		return create_date;
+	}
+
+	public void setCreate_date(Date create_date) {
+		this.create_date = create_date;
+	}
+
+	public Date getLast_update() {
+		return last_update;
+	}
+
+	public void setLast_update(Date last_update) {
+		this.last_update = last_update;
+	}
+
+	public Customer getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(Customer customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	public Set<CartItem> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(Set<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
 }

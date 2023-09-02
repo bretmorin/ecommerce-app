@@ -1,5 +1,8 @@
 package com.example.ecommerceapp.entities;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -11,6 +14,9 @@ public class Vacation {
 	private String image_url;
 	private Date create_date;
 	private Date last_update;
+
+	//bidirectional to Excursion entity
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation_id")
 	private Set<Excursion> excursions;
 
 	public Vacation(Long vacation_id, String vacation_title, String description, Long travel_fare_price, String image_url, Date create_date, Date last_update, Set<Excursion> excursions) {
