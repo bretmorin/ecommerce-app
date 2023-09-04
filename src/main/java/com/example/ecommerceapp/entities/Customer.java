@@ -1,14 +1,15 @@
 package com.example.ecommerceapp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 public class Customer {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long customer_id;
 	private String customer_first_name;
 	private String customer_last_name;
@@ -17,10 +18,17 @@ public class Customer {
 	private String phone;
 	private Date create_date;
 	private Date last_update;
-	private int division_id;
+
+	//bidirectional to Division
+	@ManyToOne
+	@JoinColumn(name = "division_id", nullable = false)
+	private Division division;
+
+	//bidirectional to Cart
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Set<Cart> carts;
 
-	public Customer(Long customer_id, String customer_first_name, String customer_last_name, String address, String postal_code, String phone, Date create_date, Date last_update, int division_id, Set<Cart> carts) {
+	public Customer(Long customer_id, String customer_first_name, String customer_last_name, String address, String postal_code, String phone, Date create_date, Date last_update, Division division, Set<Cart> carts) {
 		this.customer_id = customer_id;
 		this.customer_first_name = customer_first_name;
 		this.customer_last_name = customer_last_name;
@@ -29,7 +37,7 @@ public class Customer {
 		this.phone = phone;
 		this.create_date = create_date;
 		this.last_update = last_update;
-		this.division_id = division_id;
+		this.division = division;
 		this.carts = carts;
 	}
 
@@ -97,12 +105,12 @@ public class Customer {
 		this.last_update = last_update;
 	}
 
-	public int getDivision_id() {
-		return division_id;
+	public Division getDivision() {
+		return division;
 	}
 
-	public void setDivision_id(int division_id) {
-		this.division_id = division_id;
+	public void setDivision(Division division) {
+		this.division = division;
 	}
 
 	public Set<Cart> getCarts() {
@@ -112,7 +120,4 @@ public class Customer {
 	public void setCarts(Set<Cart> carts) {
 		this.carts = carts;
 	}
-
-
-
 }

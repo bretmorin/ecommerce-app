@@ -1,6 +1,8 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -28,7 +30,9 @@ public class CartItem {
 	@JoinColumn(name = "cart_id", nullable = false)
 	private Cart cart;
 
+	@CreationTimestamp
 	private Date create_date;
+	@UpdateTimestamp
 	private Date last_update;
 
 	public CartItem(Long cart_item_id, Set<Excursion> excursions, Vacation vacation, Cart cart, Date create_date, Date last_update) {

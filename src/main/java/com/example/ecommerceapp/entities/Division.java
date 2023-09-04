@@ -1,7 +1,7 @@
 package com.example.ecommerceapp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.Date;
 import java.util.Set;
@@ -9,21 +9,30 @@ import java.util.Set;
 @Entity
 @Table(name = "divisions")
 public class Division {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long division_id;
 	private String division;
 	private Date create_date;
 	private Date last_update;
+
+	//bidirectional to Country
+	@ManyToOne
+	@JoinColumn(name = "country_id", nullable = false)
 	private Country country;
-	private Long country_id;
+
+	//bidirectional to Customer
+	@Getter
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
 	private Set<Customer> customers;
 
-	public Division(Long division_id, String division, Date create_date, Date last_update, Country country, Long country_id, Set<Customer> customers) {
+
+	public Division(Long division_id, String division, Date create_date, Date last_update, Country country, Set<Customer> customers) {
 		this.division_id = division_id;
 		this.division = division;
 		this.create_date = create_date;
 		this.last_update = last_update;
 		this.country = country;
-		this.country_id = country_id;
 		this.customers = customers;
 	}
 
@@ -65,14 +74,6 @@ public class Division {
 
 	public void setCountry(Country country) {
 		this.country = country;
-	}
-
-	public Long getCountry_id() {
-		return country_id;
-	}
-
-	public void setCountry_id(Long country_id) {
-		this.country_id = country_id;
 	}
 
 	public Set<Customer> getCustomers() {

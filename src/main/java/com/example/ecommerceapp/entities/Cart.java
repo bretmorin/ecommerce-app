@@ -26,13 +26,16 @@ public class Cart {
 	@UpdateTimestamp
 	private Date last_update;
 
-	private Customer customer_id;
+	//bidirectional to Customer
+	@ManyToOne
+	@JoinColumn(name = "customer_id", nullable = false)
+	private Customer customer;
 
 	//bidirectional to CartItem entity
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
 	private Set<CartItem> cartItems;
 
-	public Cart(Long cart_id, String order_tracking_number, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer_id, Set<CartItem> cartItems) {
+	public Cart(Long cart_id, String order_tracking_number, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
 		this.cart_id = cart_id;
 		this.order_tracking_number = order_tracking_number;
 		this.package_price = package_price;
@@ -40,7 +43,7 @@ public class Cart {
 		this.status = status;
 		this.create_date = create_date;
 		this.last_update = last_update;
-		this.customer_id = customer_id;
+		this.customer = customer;
 		this.cartItems = cartItems;
 	}
 
@@ -100,12 +103,12 @@ public class Cart {
 		this.last_update = last_update;
 	}
 
-	public Customer getCustomer_id() {
-		return customer_id;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomer_id(Customer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Set<CartItem> getCartItems() {

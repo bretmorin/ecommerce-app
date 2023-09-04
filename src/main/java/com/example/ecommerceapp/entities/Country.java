@@ -1,7 +1,6 @@
 package com.example.ecommerceapp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Set;
@@ -9,10 +8,15 @@ import java.util.Set;
 @Entity
 @Table(name = "countries")
 public class Country {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long country_id;
 	private String country;
 	private Date create_date;
 	private Date last_update;
+
+	//bidirectional to Division
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
 	private Set<Division> divisions;
 
 	public Country(Long country_id, String country, Date create_date, Date last_update, Set<Division> divisions) {

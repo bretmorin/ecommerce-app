@@ -8,6 +8,8 @@ import java.util.Set;
 @Entity
 @Table(name = "excursions")
 public class Excursion {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long excursion_id;
 	private String excursion_title;
 	private Long excursion_price;
@@ -15,24 +17,26 @@ public class Excursion {
 	private Date create_date;
 	private Date last_update;
 
+	//bidirectional to Vacation
 	@ManyToOne
 	@JoinColumn(name = "vacation_id", nullable = false)
-	private Vacation vacation_id;
+	private Vacation vacation;
 
+	//bidirectional to CartItem
 	@ManyToMany
 	@JoinTable(name = "excursion_cartitem",
 			joinColumns = @JoinColumn(name = "excursion_id"),
 			inverseJoinColumns = @JoinColumn(name = "cart_item_id"))
 	private Set<CartItem> cartitems;
 
-	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_url, Date create_date, Date last_update, Vacation vacation_id, Set<CartItem> cartitems) {
+	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_url, Date create_date, Date last_update, Vacation vacation, Set<CartItem> cartitems) {
 		this.excursion_id = excursion_id;
 		this.excursion_title = excursion_title;
 		this.excursion_price = excursion_price;
 		this.image_url = image_url;
 		this.create_date = create_date;
 		this.last_update = last_update;
-		this.vacation_id = vacation_id;
+		this.vacation = vacation;
 		this.cartitems = cartitems;
 	}
 
@@ -84,12 +88,12 @@ public class Excursion {
 		this.last_update = last_update;
 	}
 
-	public Vacation getVacation_id() {
-		return vacation_id;
+	public Vacation getVacation() {
+		return vacation;
 	}
 
-	public void setVacation_id(Vacation vacation_id) {
-		this.vacation_id = vacation_id;
+	public void setVacation(Vacation vacation) {
+		this.vacation = vacation;
 	}
 
 	public Set<CartItem> getCartitems() {

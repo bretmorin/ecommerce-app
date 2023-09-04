@@ -1,12 +1,15 @@
 package com.example.ecommerceapp.entities;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Set;
 
+@Entity
+@Table(name = "vacations")
 public class Vacation {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long vacation_id;
 	private String vacation_title;
 	private String description;
@@ -16,7 +19,7 @@ public class Vacation {
 	private Date last_update;
 
 	//bidirectional to Excursion entity
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation_id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
 	private Set<Excursion> excursions;
 
 	public Vacation(Long vacation_id, String vacation_title, String description, Long travel_fare_price, String image_url, Date create_date, Date last_update, Set<Excursion> excursions) {
