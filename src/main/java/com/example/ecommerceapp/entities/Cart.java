@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -36,7 +37,6 @@ public class Cart {
 	private Set<CartItem> cartItems;
 
 	public Cart() {
-
 	}
 
 	public Cart(Long cart_id, String order_tracking_number, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
@@ -121,5 +121,16 @@ public class Cart {
 
 	public void setCartItems(Set<CartItem> cartItems) {
 		this.cartItems = cartItems;
+	}
+
+	public void add(CartItem cartItem) {
+		if (cartItem != null) {
+			if (cartItems == null) {
+				cartItems = new HashSet<>();
+			}
+
+			cartItems.add(cartItem);
+			cartItem.setCart(this);
+		}
 	}
 }

@@ -36,7 +36,6 @@ public class CartItem {
 	private Date last_update;
 
 	public CartItem() {
-
 	}
 
 	public CartItem(Long cart_item_id, Set<Excursion> excursions, Vacation vacation, Cart cart, Date create_date, Date last_update) {
