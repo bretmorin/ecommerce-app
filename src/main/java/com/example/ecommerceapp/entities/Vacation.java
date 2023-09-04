@@ -1,6 +1,8 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,12 +17,17 @@ public class Vacation {
 	private String description;
 	private Long travel_fare_price;
 	private String image_url;
+	@CreationTimestamp
 	private Date create_date;
+	@UpdateTimestamp
 	private Date last_update;
 
 	//bidirectional to Excursion entity
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
 	private Set<Excursion> excursions;
+
+	public Vacation() {
+	}
 
 	public Vacation(Long vacation_id, String vacation_title, String description, Long travel_fare_price, String image_url, Date create_date, Date last_update, Set<Excursion> excursions) {
 		this.vacation_id = vacation_id;

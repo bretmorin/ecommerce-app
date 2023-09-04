@@ -35,6 +35,10 @@ public class Cart {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
 	private Set<CartItem> cartItems;
 
+	public Cart() {
+
+	}
+
 	public Cart(Long cart_id, String order_tracking_number, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
 		this.cart_id = cart_id;
 		this.order_tracking_number = order_tracking_number;

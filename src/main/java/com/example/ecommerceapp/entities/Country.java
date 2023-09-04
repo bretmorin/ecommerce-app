@@ -1,6 +1,8 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -12,19 +14,24 @@ public class Country {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long country_id;
 	private String country;
+	@CreationTimestamp
 	private Date create_date;
+	@UpdateTimestamp
 	private Date last_update;
 
 	//bidirectional to Division
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-	private Set<Division> divisions;
+	private Set<Division> division;
 
-	public Country(Long country_id, String country, Date create_date, Date last_update, Set<Division> divisions) {
+	public Country() {
+	}
+
+	public Country(Long country_id, String country, Date create_date, Date last_update, Set<Division> division) {
 		this.country_id = country_id;
 		this.country = country;
 		this.create_date = create_date;
 		this.last_update = last_update;
-		this.divisions = divisions;
+		this.division = division;
 	}
 
 	public Long getCountry_id() {
@@ -59,11 +66,11 @@ public class Country {
 		this.last_update = last_update;
 	}
 
-	public Set<Division> getDivisions() {
-		return divisions;
+	public Set<Division> getDivision() {
+		return division;
 	}
 
-	public void setDivisions(Set<Division> divisions) {
-		this.divisions = divisions;
+	public void setDivision(Set<Division> division) {
+		this.division = division;
 	}
 }

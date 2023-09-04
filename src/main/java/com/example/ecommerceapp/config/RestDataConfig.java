@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 @Configuration
 public class RestDataConfig implements RepositoryRestConfigurer {
 
-//	This method exposes standard rest api end points for the following classes
+	//This method exposes standard rest api end points for the following classes
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 		config.exposeIdsFor(Country.class);

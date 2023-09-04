@@ -1,6 +1,8 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -16,7 +18,9 @@ public class Customer {
 	private String address;
 	private String postal_code;
 	private String phone;
+	@CreationTimestamp
 	private Date create_date;
+	@UpdateTimestamp
 	private Date last_update;
 
 	//bidirectional to Division
@@ -27,6 +31,9 @@ public class Customer {
 	//bidirectional to Cart
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Set<Cart> carts;
+
+	public Customer() {
+	}
 
 	public Customer(Long customer_id, String customer_first_name, String customer_last_name, String address, String postal_code, String phone, Date create_date, Date last_update, Division division, Set<Cart> carts) {
 		this.customer_id = customer_id;

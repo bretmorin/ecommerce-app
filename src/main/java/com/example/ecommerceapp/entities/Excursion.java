@@ -1,6 +1,8 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -14,7 +16,9 @@ public class Excursion {
 	private String excursion_title;
 	private Long excursion_price;
 	private String image_url;
+	@CreationTimestamp
 	private Date create_date;
+	@UpdateTimestamp
 	private Date last_update;
 
 	//bidirectional to Vacation
@@ -28,6 +32,9 @@ public class Excursion {
 			joinColumns = @JoinColumn(name = "excursion_id"),
 			inverseJoinColumns = @JoinColumn(name = "cart_item_id"))
 	private Set<CartItem> cartitems;
+
+	public Excursion() {
+	}
 
 	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_url, Date create_date, Date last_update, Vacation vacation, Set<CartItem> cartitems) {
 		this.excursion_id = excursion_id;
