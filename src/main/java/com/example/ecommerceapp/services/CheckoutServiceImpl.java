@@ -22,27 +22,31 @@ public class CheckoutServiceImpl implements CheckoutService {
 	@Override
 	@Transactional
 	public PurchaseResponse placeOrder(Purchase purchase) {
-		//retrieve the order info from services
-		Cart cart = purchase.getCart();
+		try {
+			//retrieve the order info from services
+			Cart cart = purchase.getCart();
 
-		//generate tracking number
-		String orderTrackingNumber = generateOrderTrackingNumber();
-		cart.setOrder_tracking_number(orderTrackingNumber);
+			//generate tracking number
+			String orderTrackingNumber = generateOrderTrackingNumber();
+			cart.setOrder_tracking_number(orderTrackingNumber);
 
-		//populate cart for each cart item
-		Set<CartItem> cartItems = purchase.getCartItems();
-		cartItems.forEach(item -> cart.add(item));
+			//populate cart for each cart item
+			Set<CartItem> cartItems = purchase.getCartItems();
+			cartItems.forEach(item -> cart.add(item));
 
-		//populate customer with cart
-		Customer customer = purchase.getCustomer();
-		customer.add(cart);
+			//populate customer with cart
+			Customer customer = purchase.getCustomer();
+			customer.add(cart);
 
-		//save to the database
-		customerRepository.save(customer);
+			//save to the database
+			customerRepository.save(customer);
 
-		//return a response
-		return new PurchaseResponse(orderTrackingNumber);
-
+			//return a response
+			return new PurchaseResponse(orderTrackingNumber);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	private String generateOrderTrackingNumber() {
