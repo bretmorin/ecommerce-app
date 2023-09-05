@@ -1,6 +1,7 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,10 +15,15 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long customer_id;
+	@NotNull
 	private String customer_first_name;
+	@NotNull
 	private String customer_last_name;
+	@NotNull
 	private String address;
+	@NotNull
 	private String postal_code;
+	@NotNull
 	private String phone;
 	@CreationTimestamp
 	private Date create_date;
