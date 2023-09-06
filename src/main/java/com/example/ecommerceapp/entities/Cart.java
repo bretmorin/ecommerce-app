@@ -15,7 +15,8 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cart_id;
 
-	private String order_tracking_number;
+	@Column(name = "order_tracking_number")
+	private String orderTrackingNumber;
 
 	private Long package_price;
 
@@ -39,9 +40,21 @@ public class Cart {
 	public Cart() {
 	}
 
-	public Cart(Long cart_id, String order_tracking_number, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
+	//add method
+	public void add(CartItem cartItem) {
+		if (cartItem != null) {
+			if (cartItems == null) {
+				cartItems = new HashSet<>();
+			}
+
+			cartItems.add(cartItem);
+			cartItem.setCart(this);
+		}
+	}
+
+	public Cart(Long cart_id, String orderTrackingNumber, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
 		this.cart_id = cart_id;
-		this.order_tracking_number = order_tracking_number;
+		this.orderTrackingNumber = orderTrackingNumber;
 		this.package_price = package_price;
 		this.party_size = party_size;
 		this.status = status;
@@ -59,12 +72,12 @@ public class Cart {
 		this.cart_id = cart_id;
 	}
 
-	public String getOrder_tracking_number() {
-		return order_tracking_number;
+	public String getOrderTrackingNumber() {
+		return orderTrackingNumber;
 	}
 
-	public void setOrder_tracking_number(String order_tracking_number) {
-		this.order_tracking_number = order_tracking_number;
+	public void setOrderTrackingNumber(String orderTrackingNumber) {
+		this.orderTrackingNumber = orderTrackingNumber;
 	}
 
 	public Long getPackage_price() {
@@ -121,16 +134,5 @@ public class Cart {
 
 	public void setCartItems(Set<CartItem> cartItems) {
 		this.cartItems = cartItems;
-	}
-
-	public void add(CartItem cartItem) {
-		if (cartItem != null) {
-			if (cartItems == null) {
-				cartItems = new HashSet<>();
-			}
-
-			cartItems.add(cartItem);
-			cartItem.setCart(this);
-		}
 	}
 }
