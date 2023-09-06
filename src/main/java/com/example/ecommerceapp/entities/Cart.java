@@ -13,7 +13,8 @@ import java.util.Set;
 public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cart_id;
+	@Column(name = "cart_id")
+	private Long id;
 
 	@Column(name = "order_tracking_number")
 	private String orderTrackingNumber;
@@ -52,8 +53,8 @@ public class Cart {
 		}
 	}
 
-	public Cart(Long cart_id, String orderTrackingNumber, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
-		this.cart_id = cart_id;
+	public Cart(Long id, String orderTrackingNumber, Long package_price, int party_size, StatusType status, Date create_date, Date last_update, Customer customer, Set<CartItem> cartItems) {
+		this.id = id;
 		this.orderTrackingNumber = orderTrackingNumber;
 		this.package_price = package_price;
 		this.party_size = party_size;
@@ -64,12 +65,12 @@ public class Cart {
 		this.cartItems = cartItems;
 	}
 
-	public Long getCart_id() {
-		return cart_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCart_id(Long cart_id) {
-		this.cart_id = cart_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getOrderTrackingNumber() {
