@@ -1,7 +1,6 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,17 +15,17 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id")
 	private Long id;
-	@NotNull
+
 	@Column(name = "customer_first_name")
 	private String firstName;
-	@NotNull
+
 	@Column(name = "customer_last_name")
 	private String lastName;
-	@NotNull
+
 	private String address;
-	@NotNull
+
 	private String postal_code;
-	@NotNull
+
 	private String phone;
 	@CreationTimestamp
 	private Date create_date;
@@ -35,7 +34,7 @@ public class Customer {
 
 	//bidirectional to Division
 	@ManyToOne
-	@JoinColumn(name = "division_id", nullable = false)
+	@JoinColumn(name = "division_id")
 	private Division division;
 
 	//bidirectional to Cart

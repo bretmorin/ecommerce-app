@@ -1,7 +1,6 @@
 package com.example.ecommerceapp.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,7 +15,7 @@ public class Division {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "division_id")
 	private Long id;
-	@Column(name = "division", nullable = false)
+	@Column(name = "division")
 	private String division_name;
 
 	@CreationTimestamp
