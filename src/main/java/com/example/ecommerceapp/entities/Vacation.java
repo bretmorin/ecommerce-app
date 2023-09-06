@@ -12,11 +12,12 @@ import java.util.Set;
 public class Vacation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long vacation_id;
+	@Column(name = "vacation_id")
+	private Long id;
 	private String vacation_title;
 	private String description;
 	@Column(name = "travel_fare_price")
-	private Long travel_price;
+	private Double travel_price;
 	@Column(name = "image_url")
 	private String image_URL;
 	@CreationTimestamp
@@ -31,8 +32,8 @@ public class Vacation {
 	public Vacation() {
 	}
 
-	public Vacation(Long vacation_id, String vacation_title, String description, Long travel_price, String image_URL, Date create_date, Date last_update, Set<Excursion> excursions) {
-		this.vacation_id = vacation_id;
+	public Vacation(Long id, String vacation_title, String description, Double travel_price, String image_URL, Date create_date, Date last_update, Set<Excursion> excursions) {
+		this.id = id;
 		this.vacation_title = vacation_title;
 		this.description = description;
 		this.travel_price = travel_price;
@@ -42,12 +43,12 @@ public class Vacation {
 		this.excursions = excursions;
 	}
 
-	public Long getVacation_id() {
-		return vacation_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setVacation_id(Long vacation_id) {
-		this.vacation_id = vacation_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getVacation_title() {
@@ -66,11 +67,11 @@ public class Vacation {
 		this.description = description;
 	}
 
-	public Long getTravel_price() {
+	public Double getTravel_price() {
 		return travel_price;
 	}
 
-	public void setTravel_price(Long travel_price) {
+	public void setTravel_price(Double travel_price) {
 		this.travel_price = travel_price;
 	}
 

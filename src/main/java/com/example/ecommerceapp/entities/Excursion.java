@@ -12,9 +12,10 @@ import java.util.Set;
 public class Excursion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long excursion_id;
+	@Column(name = "excursion_id")
+	private Long id;
 	private String excursion_title;
-	private Long excursion_price;
+	private Double excursion_price;
 	@Column(name = "image_url")
 	private String image_URL;
 	@CreationTimestamp
@@ -37,8 +38,8 @@ public class Excursion {
 	public Excursion() {
 	}
 
-	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_URL, Date create_date, Date last_update, Vacation vacation, Set<CartItem> cartitems) {
-		this.excursion_id = excursion_id;
+	public Excursion(Long id, String excursion_title, Double excursion_price, String image_URL, Date create_date, Date last_update, Vacation vacation, Set<CartItem> cartitems) {
+		this.id = id;
 		this.excursion_title = excursion_title;
 		this.excursion_price = excursion_price;
 		this.image_URL = image_URL;
@@ -48,12 +49,12 @@ public class Excursion {
 		this.cartitems = cartitems;
 	}
 
-	public Long getExcursion_id() {
-		return excursion_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setExcursion_id(Long excursion_id) {
-		this.excursion_id = excursion_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getExcursion_title() {
@@ -64,11 +65,11 @@ public class Excursion {
 		this.excursion_title = excursion_title;
 	}
 
-	public Long getExcursion_price() {
+	public Double getExcursion_price() {
 		return excursion_price;
 	}
 
-	public void setExcursion_price(Long excursion_price) {
+	public void setExcursion_price(Double excursion_price) {
 		this.excursion_price = excursion_price;
 	}
 
