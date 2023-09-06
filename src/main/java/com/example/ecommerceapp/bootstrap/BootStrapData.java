@@ -30,7 +30,7 @@ public class BootStrapData implements CommandLineRunner {
 	public void mySampleData () {
 		//country object
 		Country country = new Country();
-		country.setCountry("SampleCountry");
+		country.setCountry_name("SampleCountry");
 
 		//save the country to the database
 		country = countryRepository.save(country);
@@ -39,7 +39,7 @@ public class BootStrapData implements CommandLineRunner {
 
 			//division object for testing
 			Division division = new Division();
-			division.setDivision("SampleDivision" + i);
+			division.setDivision_name("SampleDivision" + i);
 			//set the country for the division
 			division.setCountry(country);
 
@@ -48,8 +48,8 @@ public class BootStrapData implements CommandLineRunner {
 
 			//sample customers for testing
 			Customer customer = new Customer();
-			customer.setCustomer_first_name("SampleFirstName" + i);
-			customer.setCustomer_last_name("SampleLastName" + i);
+			customer.setFirstName("SampleFirstName" + i);
+			customer.setLastName("SampleLastName" + i);
 			customer.setAddress("Sample Address " + i);
 			customer.setPhone("Sample Phone " + i);
 			customer.setPostal_code("Sample Postal Code " + i);

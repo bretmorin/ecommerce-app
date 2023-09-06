@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,8 +14,10 @@ import java.util.Set;
 public class Division {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long division_id;
-	private String division;
+	@Column(name = "division_id")
+	private Long id;
+	@Column(name = "division", nullable = false)
+	private String division_name;
 
 	@CreationTimestamp
 	private Date create_date;
@@ -22,40 +25,55 @@ public class Division {
 	private Date last_update;
 
 	//bidirectional to Country
-	@ManyToOne
-	@JoinColumn(name = "country_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
 	private Country country;
 
 	//bidirectional to Customer
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
 	private Set<Customer> customers;
 
+	@Column(name="country_id")
+	private long country_id;
+
+	//add method
+	public void add(Customer customer) {
+		if (customer != null) {
+			if (customers == null) {
+				customers = new HashSet<>();
+			}
+			customers.add(customer);
+			customer.setDivision(this);
+		}
+	}
+
 	public Division() {
 	}
 
-	public Division(Long division_id, String division, Date create_date, Date last_update, Country country, Set<Customer> customers) {
-		this.division_id = division_id;
-		this.division = division;
+	public Division(Long id, String division_name, Date create_date, Date last_update, Country country, Set<Customer> customers, long country_id) {
+		this.id = id;
+		this.division_name = division_name;
 		this.create_date = create_date;
 		this.last_update = last_update;
 		this.country = country;
 		this.customers = customers;
+		this.country_id = country_id;
 	}
 
-	public Long getDivision_id() {
-		return division_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDivision_id(Long division_id) {
-		this.division_id = division_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getDivision() {
-		return division;
+	public String getDivision_name() {
+		return division_name;
 	}
 
-	public void setDivision(String division) {
-		this.division = division;
+	public void setDivision_name(String division_name) {
+		this.division_name = division_name;
 	}
 
 	public Date getCreate_date() {
@@ -79,6 +97,7 @@ public class Division {
 	}
 
 	public void setCountry(Country country) {
+		setCountry_id(country.getId());
 		this.country = country;
 	}
 
@@ -88,5 +107,13 @@ public class Division {
 
 	public void setCustomers(Set<Customer> customers) {
 		this.customers = customers;
+	}
+
+	public long getCountry_id() {
+		return country_id;
+	}
+
+	public void setCountry_id(long country_id) {
+		this.country_id = country_id;
 	}
 }

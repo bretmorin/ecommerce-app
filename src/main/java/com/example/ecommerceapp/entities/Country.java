@@ -12,8 +12,10 @@ import java.util.Set;
 public class Country {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long country_id;
-	private String country;
+	@Column(name = "country_id")
+	private Long id;
+	@Column(name = "country")
+	private String country_name;
 	@CreationTimestamp
 	private Date create_date;
 	@UpdateTimestamp
@@ -26,28 +28,28 @@ public class Country {
 	public Country() {
 	}
 
-	public Country(Long country_id, String country, Date create_date, Date last_update, Set<Division> division) {
-		this.country_id = country_id;
-		this.country = country;
+	public Country(Long id, String country_name, Date create_date, Date last_update, Set<Division> division) {
+		this.id = id;
+		this.country_name = country_name;
 		this.create_date = create_date;
 		this.last_update = last_update;
 		this.division = division;
 	}
 
-	public Long getCountry_id() {
-		return country_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCountry_id(Long country_id) {
-		this.country_id = country_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getCountry_name() {
+		return country_name;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountry_name(String country_name) {
+		this.country_name = country_name;
 	}
 
 	public Date getCreate_date() {

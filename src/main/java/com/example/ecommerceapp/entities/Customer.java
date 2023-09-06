@@ -14,11 +14,14 @@ import java.util.Set;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long customer_id;
+	@Column(name = "customer_id")
+	private Long id;
 	@NotNull
-	private String customer_first_name;
+	@Column(name = "customer_first_name")
+	private String firstName;
 	@NotNull
-	private String customer_last_name;
+	@Column(name = "customer_last_name")
+	private String lastName;
 	@NotNull
 	private String address;
 	@NotNull
@@ -42,10 +45,22 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(Long customer_id, String customer_first_name, String customer_last_name, String address, String postal_code, String phone, Date create_date, Date last_update, Division division, Set<Cart> carts) {
-		this.customer_id = customer_id;
-		this.customer_first_name = customer_first_name;
-		this.customer_last_name = customer_last_name;
+	//add method
+	public void add(Cart cart) {
+		if (cart != null) {
+			if (carts == null) {
+				carts = new HashSet<>();
+			}
+
+			carts.add(cart);
+			cart.setCustomer(this);
+		}
+	}
+
+	public Customer(Long id, String firstName, String lastName, String address, String postal_code, String phone, Date create_date, Date last_update, Division division, Set<Cart> carts) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
 		this.postal_code = postal_code;
 		this.phone = phone;
@@ -55,28 +70,28 @@ public class Customer {
 		this.carts = carts;
 	}
 
-	public Long getCustomer_id() {
-		return customer_id;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCustomer_id(Long customer_id) {
-		this.customer_id = customer_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getCustomer_first_name() {
-		return customer_first_name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setCustomer_first_name(String customer_first_name) {
-		this.customer_first_name = customer_first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getCustomer_last_name() {
-		return customer_last_name;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setCustomer_last_name(String customer_last_name) {
-		this.customer_last_name = customer_last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getAddress() {
@@ -133,16 +148,5 @@ public class Customer {
 
 	public void setCarts(Set<Cart> carts) {
 		this.carts = carts;
-	}
-
-	public void add(Cart cart) {
-		if (cart != null) {
-			if (carts == null) {
-				carts = new HashSet<>();
-			}
-
-			carts.add(cart);
-			cart.setCustomer(this);
-		}
 	}
 }

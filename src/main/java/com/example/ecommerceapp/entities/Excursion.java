@@ -15,7 +15,8 @@ public class Excursion {
 	private Long excursion_id;
 	private String excursion_title;
 	private Long excursion_price;
-	private String image_url;
+	@Column(name = "image_url")
+	private String image_URL;
 	@CreationTimestamp
 	private Date create_date;
 	@UpdateTimestamp
@@ -36,11 +37,11 @@ public class Excursion {
 	public Excursion() {
 	}
 
-	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_url, Date create_date, Date last_update, Vacation vacation, Set<CartItem> cartitems) {
+	public Excursion(Long excursion_id, String excursion_title, Long excursion_price, String image_URL, Date create_date, Date last_update, Vacation vacation, Set<CartItem> cartitems) {
 		this.excursion_id = excursion_id;
 		this.excursion_title = excursion_title;
 		this.excursion_price = excursion_price;
-		this.image_url = image_url;
+		this.image_URL = image_URL;
 		this.create_date = create_date;
 		this.last_update = last_update;
 		this.vacation = vacation;
@@ -71,12 +72,12 @@ public class Excursion {
 		this.excursion_price = excursion_price;
 	}
 
-	public String getImage_url() {
-		return image_url;
+	public String getImage_URL() {
+		return image_URL;
 	}
 
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+	public void setImage_URL(String image_URL) {
+		this.image_URL = image_URL;
 	}
 
 	public Date getCreate_date() {
