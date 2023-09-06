@@ -4,6 +4,7 @@ import com.example.ecommerceapp.dao.CustomerRepository;
 import com.example.ecommerceapp.entities.Cart;
 import com.example.ecommerceapp.entities.CartItem;
 import com.example.ecommerceapp.entities.Customer;
+import com.example.ecommerceapp.entities.StatusType;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,9 @@ public class CheckoutServiceImpl implements CheckoutService {
 			//generate tracking number
 			String orderTrackingNumber = generateOrderTrackingNumber();
 			cart.setOrderTrackingNumber(orderTrackingNumber);
+
+			//set the status type for the cart
+			cart.setStatus(StatusType.ordered);
 
 			//populate cart for each cart item
 			Set<CartItem> cartItems = purchase.getCartItems();

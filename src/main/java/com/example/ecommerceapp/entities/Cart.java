@@ -23,6 +23,7 @@ public class Cart {
 
 	private int party_size;
 
+	@Enumerated(EnumType.STRING)
 	private StatusType status;
 	@CreationTimestamp
 	private Date create_date;
